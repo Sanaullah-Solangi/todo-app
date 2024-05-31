@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SMIT todo app</title>
+    <link rel="stylesheet" href="./assets/style.css" />
+    <link rel="stylesheet" href="./assets/responsive.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body class="d-flex jc-center al-center">
+    <!--!=============== TODO APP CONTAINER ===============-->
+    <div class="container p-relative">
+      <div class="header d-flex dir-col jc-center">
+        <!--!todo======= HEADING =======-->
+        <h1 class="heading txt-cap txt-center">my todo app</h1>
+        <!--!todo======= INPUT FOR TODO ADDITION =======-->
+        <div class="addTodo d-flex jc-between al-center">
+          <!--!?=== INPUT LABEL ===-->
+          <label for="todo" class="w-100">
+            <input
+              type="text"
+              placeholder="enter your todo"
+              class="w-100"
+              name="todo"
+              id="todo"
+              onkeypress="addTodoOnEnter(event)"
+            />
+          </label>
+          <!--!?=== BUTTON TO ADD TODO ===-->
+          <button onclick="addTodo()" class="btn addBtn pointer">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+      <!--!todo======= TODO LIST =======-->
+      <ul class="list"></ul>
+      <!--!todo======= DELETE ALL BTN =======-->
+      <div
+        class="deleteAllBtn d-flex al-center jc-center radius-50per transition-3ms"
+      >
+        <i class="fa-solid fa-trash"></i>
+      </div>
+    </div>
+    <!--!todo======= LIST STATUS =======-->
+    <p class="listStatus p-absolute txt-cap txt-center d-flex jc-around">
+      <span class="pendingTodos">pending todo are 0</span
+      ><span class="completedTodos">pending todo are 0 </span>
+    </p>
+    <script src="./assets/app.js"></script>
+  </body>
+</html>

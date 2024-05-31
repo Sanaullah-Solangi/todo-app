@@ -1,0 +1,324 @@
+/*!========== common use css ==========*/
+@font-face {
+  font-family: "jost";
+  src: url(./Jost-Regular.ttf);
+}
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+  text-decoration: none;
+  scroll-behavior: smooth;
+  font-family: "jost", sans-serif;
+  list-style: none;
+  text-transform: capitalize;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+/*!========== website theme ==========*/
+
+:root {
+  --mainColor1: rgb(204, 49, 61);
+  --mainColor2: rgb(250, 107, 126);
+  --bg-gradient: linear-gradient(
+    to right,
+    var(--mainColor1),
+    var(--mainColor2)
+  );
+  --textColor: ;
+  --black: #000;
+  --white: #fff;
+}
+
+/*!========== ReuseAble Code ==========*/
+
+/*todo===== all flex properties =====*/
+
+.d-flex {
+  display: flex;
+}
+
+/*?=== justify content properties ===*/
+
+.jc-center {
+  justify-content: center;
+}
+.jc-start {
+  justify-content: start;
+}
+.jc-end {
+  justify-content: end;
+}
+.jc-between {
+  justify-content: space-between;
+}
+.jc-evenly {
+  justify-content: space-evenly;
+}
+.jc-around {
+  justify-content: space-around;
+}
+
+/*?=== aling items properties ===*/
+
+.al-center {
+  align-items: center;
+}
+.al-start {
+  align-items: start;
+}
+.al-end {
+  align-items: end;
+}
+
+/*?=== flex directions properties ===*/
+
+.dir-col {
+  flex-direction: column;
+}
+.dir-col-reverse {
+  flex-direction: column-reverse;
+}
+
+/*todo===== all txt properties =====*/
+
+.txt-up {
+  text-transform: uppercase;
+}
+
+.txt-cap {
+  text-transform: capitalize;
+}
+.txt-center {
+  text-align: center;
+}
+.bold {
+  font-weight: bold;
+}
+
+/*todo===== all position properties =====*/
+
+.p-relative {
+  position: relative;
+}
+.p-absolute {
+  content: "";
+  position: absolute;
+}
+
+/*todo===== all other properties =====*/
+
+.d-none {
+  display: none;
+}
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100% !important;
+}
+.m-auto {
+  margin: auto;
+}
+.pointer {
+  cursor: pointer;
+}
+.border-none {
+  border: none;
+}
+.radius-50per {
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+.transition-3ms {
+  transition: all 0.3s linear;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -ms-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+}
+.btn,
+input {
+  border: none;
+  outline: none;
+}
+
+/*!========== todo app container ==========*/
+.container {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  height: 500px;
+  max-height: 60%;
+  overflow: hidden;
+}
+
+/* HEADER STYLING */
+.container,
+.header {
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+}
+
+.header {
+  background-color: var(--mainColor1);
+  color: var(--white);
+  padding: 1rem 1rem;
+  gap: 1rem;
+}
+
+/* MAIN HEADING */
+.heading {
+  font-size: 3rem;
+}
+
+/* CONTAINER OF USER INPUT & ADD BTN */
+.addTodo {
+  background-color: var(--white);
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+}
+
+/* USER INPUT */
+.addTodo > label > input {
+  padding: 0.3rem 1rem;
+  font-size: 2rem;
+}
+
+/* ADD TODO BTN */
+.addTodo > .addBtn {
+  background-color: var(--mainColor2);
+  color: var(--white);
+  padding: 1rem 3rem;
+  font-size: 2rem;
+}
+
+/* IT'S TODO LIST CONTAINER */
+.list {
+  padding: 1rem;
+  height: 80%;
+  overflow-y: scroll;
+}
+
+.list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: var(--mainColor1);
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+/* IT'S TODO LIST ITEMS */
+.list > li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  margin-bottom: 0.5rem;
+}
+
+/* 'INPUT' CONTAINER OF ITEM VALUE */
+.list > li > input {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  font-size: 2rem;
+}
+
+/* CONTAINER OF BUTTONS IN TODO ITEM FOR DELETATION, EIDTING OR CHECK */
+.list > li > .listBtns {
+  gap: 0.7px;
+  color: white;
+}
+
+/* BUTTONS IN TODO ITEM FOR DELETE, EIDT AND CHECK */
+.list > li > .listBtns :is(.editBtn, .deleteBtn, .checkbtn) {
+  background-color: var(--mainColor2);
+  width: 50px;
+  height: 100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.addTodo > .addBtn:hover,
+.list > li > .listBtns :is(.editBtn, .deleteBtn, .checkbtn):hover {
+  background-color: var(--mainColor1);
+}
+
+/* ICONS IN BUTTONS */
+.list > li > .listBtns i {
+  font-size: 1.7rem;
+}
+
+/* DELETE ALL BTN */
+.container > .deleteAllBtn {
+  position: absolute;
+  bottom: -100%;
+  background-color: rgb(246, 40, 40);
+  width: 50px;
+  height: 50px;
+  transition: all 0.5s linear;
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -ms-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+}
+
+.container > .deleteAllBtn {
+  left: 50%;
+  transform: translate(-50%);
+  -webkit-transform: translate(-50%);
+  -moz-transform: translate(-50%);
+  -ms-transform: translate(-50%);
+  -o-transform: translate(-50%);
+  left: 50%;
+  transform: translate(-50%);
+  -webkit-transform: translate(-50%);
+  -moz-transform: translate(-50%);
+  -ms-transform: translate(-50%);
+  -o-transform: translate(-50%);
+}
+
+.container > .showDeleteAllBtn {
+  bottom: 15%;
+}
+
+.container > .deleteAllBtn:hover {
+  background-color: red;
+}
+.deleteAllBtn > i {
+  font-size: 2rem;
+  color: red;
+  filter: drop-shadow(0 0 2px rgb(0, 0, 0));
+  -webkit-filter: drop-shadow(0 0 2px rgb(0, 0, 0));
+}
+
+.deleteAllBtn:hover i {
+  color: rgb(246, 40, 40);
+}
+
+/* LIST ITEMS STATUS */
+.listStatus {
+  bottom: 5%;
+  width: 90%;
+  background: var(--bg-gradient);
+  font-size: 2rem;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  color: var(--white);
+  font-weight: bold;
+}
+
+@media (width <= 900px) {
+  .container {
+    width: 100%;
+  }
+}
