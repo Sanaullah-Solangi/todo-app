@@ -1,1 +1,1 @@
-[https://smittodoapp.netlify.app/](Todo App)
+https://smittodoapp.netlify.app/
