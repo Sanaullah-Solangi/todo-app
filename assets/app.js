@@ -5,6 +5,7 @@ var pendingTodos = document.querySelector(".pendingTodos"); // PENDING TODO'S SP
 var completedTodos = document.querySelector(".completedTodos"); // COMPLETED TODO'S SPAN
 var pendingTodo = 0;
 var completedTodo = 0;
+var deletedTodo = 0;
 //! ADDING TODOS IN LIST
 function addTodo() {
   // GETTING VALUE FROM INPUT
@@ -62,6 +63,7 @@ function editList(btn) {
   btn.parentElement.parentElement.childNodes[1].value = "";
   btn.parentElement.parentElement.childNodes[1].focus();
 }
+//! FUNCTION TO UPDATE VALUE
 function updateList(event) {
   if (event.keyCode == 13) {
     event.target.setAttribute("disabled", "true");
@@ -82,7 +84,6 @@ function checkList(btn) {
     completedTodo++;
     pendingTodo--;
     showStatus(pendingTodo, completedTodo);
-    console.log(pendingTodo, completedTodo, "in check if");
   } else {
     parent.style.textDecoration = "none";
     btn.style.backgroundColor = "var(--mainColor2)";
@@ -107,8 +108,9 @@ function deleteList(btn) {
   }
   // SHOWING OR HIDING DELETE ALL BTN
   setTimeout(showDelAllHistoryBtn, 300);
-  if (pendingTodo >= 0) {
-    console.log(pendingTodo);
+  if (checkbtn.hasAttribute("id")) {
+    console.log(checkbtn);
+    console.log("hang");
     pendingTodo--;
     showStatus(pendingTodo, completedTodo);
   }

@@ -233,7 +233,7 @@ input {
 
 /* CONTAINER OF BUTTONS IN TODO ITEM FOR DELETATION, EIDTING OR CHECK */
 .list > li > .listBtns {
-  gap: 0.7px;
+  gap: 0.5rem;
   color: white;
 }
 
@@ -285,7 +285,7 @@ input {
 }
 
 .container > .showDeleteAllBtn {
-  bottom: 15%;
+  bottom: 5%;
 }
 
 .container > .deleteAllBtn:hover {
@@ -319,6 +319,6 @@ input {
 
 @media (width <= 900px) {
   .container {
-    width: 100%;
+    width: 90%;
   }
 }
