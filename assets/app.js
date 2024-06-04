@@ -3,9 +3,6 @@ var list = document.querySelector(".list"); // IT IS TODO LIST
 var showDeleteAllBtn = document.querySelector(".deleteAllBtn"); // DELETE ALL BTN
 var pendingTodos = document.querySelector(".pendingTodos"); // PENDING TODO'S SPAN
 var completedTodos = document.querySelector(".completedTodos"); // COMPLETED TODO'S SPAN
-var pendingTodo = 0;
-var completedTodo = 0;
-var deletedTodo = 0;
 //! ADDING TODOS IN LIST
 function addTodo() {
   // GETTING VALUE FROM INPUT
@@ -14,8 +11,8 @@ function addTodo() {
     todo.placeholder = "Enter your todo";
     // ADDING 'li' IN TODO LIST
     list.innerHTML += `
-  <li class="w-100 d-flex jc-between">
-  <input disabled type="text" value="${todo.value}">
+  <li class="w-100 d-flex jc-between pending">
+  <input class="liInput" disabled type="text" value="${todo.value}">
   <div class="listBtns d-flex jc-center">
    <!--!?=== edit btn ===-->
   <div class="editBtn pointer d-flex jc-center al-center" onclick="editList(this)">
@@ -35,12 +32,14 @@ function addTodo() {
     todo.value = "";
     // CALLING SHOW DELETE ALL BTN WHEN 'lis' ARE ADDED
     showDelAllHistoryBtn();
-    pendingTodo++;
-    showStatus(pendingTodo, completedTodo);
+    // UPDATING PENDING TODOS LENGTH
+    updateStatus();
+    list.scrollTop = list.scrollHeight;
   } else {
     todo.placeholder = "please Enter any value";
   }
 }
+
 //! CALLING 'addTodo()' FUNCTION ON 'ENTER KEY'
 function addTodoOnEnter(event) {
   if (event.keyCode === 13) {
@@ -55,43 +54,44 @@ function addTodoOnEnter(event) {
 //! FUNCTION TO EDIT VALUE
 function editList(btn) {
   // GETTING ELEMENT
-  btn.parentElement.parentElement.childNodes[1].removeAttribute("disabled");
-  btn.parentElement.parentElement.childNodes[1].setAttribute(
-    "onkeypress",
-    "updateList(event)"
-  );
-  btn.parentElement.parentElement.childNodes[1].value = "";
-  btn.parentElement.parentElement.childNodes[1].focus();
+  var li = btn.closest("li");
+  var liInput = li.querySelector("input");
+  liInput.removeAttribute("disabled");
+  liInput.setAttribute("onkeypress", "updateList(event)");
+  liInput.value = "";
+  liInput.focus();
+  btn.style.backgroundColor = "var(--mainColor1)";
+  liInput.style.borderBottom = "3px solid red";
 }
 //! FUNCTION TO UPDATE VALUE
 function updateList(event) {
   if (event.keyCode == 13) {
     event.target.setAttribute("disabled", "true");
+    var editBtn = document.querySelector(".editBtn");
+    editBtn.style.backgroundColor = "var(--mainColor2)";
+    event.target.closest("li").style.borderBottom =
+      "1px solid rgba(0, 0, 0, 0.3)";
   }
 }
 //! FUNCTION TO CHECK LIST
-var checkCounter = 0; // TO CALCULATEF PENDING & COMPLETED TODOS
 function checkList(btn) {
   // GETTING TODO'S VALUE
-  var parent = btn.parentElement.parentElement.childNodes[1];
+  var li = btn.closest("li");
+  var liInput = li.querySelector("input");
   // CONDITIONS TO CHECK OR UNCHECK TODO ITEM
-  if (btn.hasAttribute("id")) {
-    parent.style.textDecoration = "line-through";
-    parent.style.textDecorationColor = "green";
+  if (li.classList.contains("pending")) {
+    liInput.style.textDecoration = "line-through";
+    liInput.style.textDecorationColor = "green";
     btn.style.backgroundColor = "var(--mainColor1)";
-    btn.removeAttribute("id");
-    // INCREAMENTING COUNTER IF ANY TASK IS COMPLETED
-    completedTodo++;
-    pendingTodo--;
-    showStatus(pendingTodo, completedTodo);
+    // REPLACING PENDING CLASS WITH COMPLETED IF ANY TASK IS COMPLETED
+    li.classList.replace("pending", "completed");
+    updateStatus();
   } else {
-    parent.style.textDecoration = "none";
+    liInput.style.textDecoration = "none";
     btn.style.backgroundColor = "var(--mainColor2)";
-    btn.setAttribute("id", "checked");
-    // DECREAMENTING COUNTER IF ANY TASK IS CHECKED BY MISTAKE
-    completedTodo--;
-    pendingTodo++;
-    showStatus(pendingTodo, completedTodo);
+    // REPLACING PENDING CLASS WITH COMPLETED IF ANY TASK IS COMPLETED
+    li.classList.replace("completed", "pending");
+    updateStatus();
   }
 }
 
@@ -101,19 +101,14 @@ function deleteList(btn) {
   var li = document.querySelectorAll(".list > li");
   if (li.length != 1) {
     // IF THERE ARE MORE THAN ONE LI THAN DELETE SELECTEDF LI
-    btn.parentElement.parentElement.remove();
+    btn.closest("li").remove();
   } else {
     // IF JUST ONE 'li' IS REMAINING THAN EPMTY THE TODO LIST
     list.innerHTML = "";
   }
   // SHOWING OR HIDING DELETE ALL BTN
   setTimeout(showDelAllHistoryBtn, 300);
-  if (checkbtn.hasAttribute("id")) {
-    console.log(checkbtn);
-    console.log("hang");
-    pendingTodo--;
-    showStatus(pendingTodo, completedTodo);
-  }
+  updateStatus();
 }
 
 //! FUNCTION TO SHOW & HIDE THE 'CLEAR ALL HISTORY' BUTTON
@@ -130,11 +125,14 @@ function showDelAllHistoryBtn() {
 //! FUNCTION TO CLEAR ALL HISTORY & HIDE 'ALL CLEAR' BUTTON
 showDeleteAllBtn.addEventListener("click", () => {
   list.innerHTML = ""; // EMPTY TODO LIST
+  updateStatus(); // UPDATING THE LENGTH OF LIS
   setTimeout(showDelAllHistoryBtn, 300); // HIDING DELETE ALL BTN
 });
 
 //! FUNCTION TO SHOW STATUS
-function showStatus(pending, completed) {
-  pendingTodos.innerHTML = `pending todos are ${pending}`;
-  completedTodos.innerHTML = `completed todos are ${completed}`;
+function updateStatus() {
+  var pendings = document.querySelectorAll(".pending");
+  var completed = document.querySelectorAll(".completed");
+  pendingTodos.innerHTML = `pending todos are ${pendings.length}`;
+  completedTodos.innerHTML = `completed todos are ${completed.length}`;
 }
