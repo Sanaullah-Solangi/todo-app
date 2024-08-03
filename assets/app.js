@@ -518,9 +518,10 @@ window.logOut = function () {
 window.addUserDataToFireStore = async function (user) {
   spinerText.innerHTML = "Almost done, saving your data...";
   spiner.classList.replace("d-none", "d-flex");
+  let userName = document.querySelector("#name");
   try {
     const response = await setDoc(doc(db, "users", user.uid), {
-      name: user.displayName,
+      name: userName.value,
       email: user.email,
       emailVarification: user.emailVerified,
       uid: user.uid,
@@ -728,19 +729,14 @@ window.resetPassword = function () {
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/auth.user
     const uid = user.uid;
     console.log(user);
     if (location.pathname == "/main.html") {
       getUserDataFromFireStore();
     }
-
-    // ...
   } else {
     // User is signed out
     console.log("user not exist");
-    // ...
   }
 });
 
