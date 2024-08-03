@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SMIT todo app</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./assets/style.css" />
+    <link rel="stylesheet" href="./assets/responsive.css" />
+  </head>
+  <body class="d-flex jc-center al-start vh">
+    <!--!=============== TODO APP CONTAINER ===============-->
+    <div class="container p-relative">
+      <div class="header d-flex dir-col jc-center">
+        <!--!todo======= HEADING =======-->
+        <h1
+          onclick="getInxOfArrFromFireStore()"
+          class="heading txt-cap txt-center d-flex jc-between al-center"
+        >
+          my todo app
+          <i
+            class="fa-solid fa-arrow-right-from-bracket logOutBtn pointer h-100 transition-1ms"
+            title="logOut"
+            onclick="logOut()"
+          ></i>
+        </h1>
+        <!--!todo======= INPUT FOR TODO ADDITION =======-->
+        <div class="addTodo d-flex jc-between al-center">
+          <!--!?=== INPUT LABEL ===-->
+          <label for="todo" class="w-100">
+            <input
+              type="text"
+              placeholder="enter your todo"
+              class="w-100"
+              name="todo"
+              id="todo"
+            />
+          </label>
+          <!--!?=== BUTTON TO ADD TODO ===-->
+          <button onclick="addTodo()" class="btn addBtn pointer">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+      <!--!todo======= TODO LIST =======-->
+      <ul class="list"></ul>
+      <!--!todo======= DELETE ALL BTN =======-->
+      <div
+        class="deleteAllBtn d-flex al-center jc-center radius-50per transition-3ms"
+      >
+        <i class="fa-solid fa-trash"></i>
+      </div>
+    </div>
+    <!--!=============== SPINNER ===============-->
+    <dialog
+      open
+      class="spinerContainer d-none w-100 h-100 d-flex dir-col jc-center al-center"
+    >
+      <img src="./assets/images/loader.gif" alt="" />
+      <p class="txt-cap spinerText"></p>
+    </dialog>
+    <!--!todo======= LIST STATUS =======-->
+    <p class="listStatus p-absolute txt-cap txt-center d-flex jc-around">
+      <span class="pendingTodos">pending todo are 0</span
+      ><span>developd by sanaullah</span
+      ><span class="completedTodos">completed todo are 0 </span>
+    </p>
+  </body>
+
+  <script type="module" defer src="./assets/firebase.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script type="module" defer src="./assets/app.js"></script>
+</html>

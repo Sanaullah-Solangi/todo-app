@@ -1,0 +1,32 @@
+@media (width <= 900px) {
+  .container {
+    width: 90%;
+  }
+}
+
+@media (width <= 855px) {
+  .formWrapper {
+    width: 80%;
+  }
+}
+
+@media (width <= 565px) {
+  .sweatPopup {
+    width: 90%;
+  }
+  .sweatTitle {
+    font-size: 2.5rem !important;
+  }
+  .sweatPara {
+    font-size: 1.6rem !important;
+  }
+  .sweatBtn {
+    font-size: 1.3rem !important;
+  }
+}
+
+@media (width <= 500px) {
+  .formWrapper {
+    width: 90%;
+  }
+}
